@@ -58,16 +58,7 @@ select
 		<td>
 			<button onclick="collapse()">Close</button>
 		</td>
-	</tr>
-	<tr>
-		<td>
-			<button onclick="expandTwoPart()">Two Part Expand</button>
-			<input type="checkbox" id="TwoPartExpandUseCustomClose">useCustomClose</input>
-		</td>
-		<td>
-			<textarea id="TwoPartExpandURL" rows="1" cols="50">http://admarvel.s3.amazonaws.com/demo/mraid/MRAID_v2_twopart.html</textarea>
-		</td>
-	</tr>
+</tr>
 </table>
 
 <script language="javascript" type="text/javascript">
@@ -294,86 +285,10 @@ function expandTwoPart()
 	mraid.expand(url);
 }
 
-function resize()
-{
-	var width = document.getElementById("ResizeWidth").value;
-	var height = document.getElementById("ResizeHeight").value;
-	var offsetX = document.getElementById("ResizeOffsetX").value;
-	var offsetY = document.getElementById("ResizeOffsetY").value;
-	
-	var resizePropertiesObj = {"width":width,"height":height,"offsetX":offsetX,"offsetY":offsetY};
-
-	var customClosePosition = document.getElementById("customClosePosition").value;
-	if (customClosePosition != "")
-	{
-		resizePropertiesObj["customClosePosition"] = customClosePosition;
-	}
-	var allowOffscreen = document.getElementById("ResizeAllowOffscreen").checked;
-	if (!allowOffscreen)
-	{
-		resizePropertiesObj["allowOffscreen"] = false;
-	}
-	else
-	{
-		resizePropertiesObj["allowOffscreen"] = true;
-	}
-	
-	logMRAIDMessage("Calling resize with properties: " + printObject(resizePropertiesObj));
-	
-	mraid.setResizeProperties(resizePropertiesObj);
-	
-	updateResizePropertiesDiagnostic();
-	
-	mraid.resize();
-}
 
 function collapse()
 {	
 	mraid.close();	
-}
-
-function setOrientationProperties()
-{	
-	var allowOrientationChange = document.getElementById("AllowOrientationChange").checked;
-	var forceOrientation = document.getElementById("ForceOrientation").value;
-
-	var orientationPropertiesObj = {"allowOrientationChange":allowOrientationChange,"forceOrientation":forceOrientation};
-	
-	logMRAIDMessage("Setting orientation properties: " + printObject(orientationPropertiesObj));
-
-	mraid.setOrientationProperties(orientationPropertiesObj);
-	
-	updateOrientationPropertiesDiagnostic();
-}
-
-function openSite()
-{
-	var url = document.getElementById("OpenURL").value;
-	
-	mraid.open(url);
-}
-
-function playVideo()
-{
-	var url = document.getElementById("PlayVideoURL").value;
-	
-	mraid.playVideo(url);
-}
-
-function storePicture()
-{
-	var url = document.getElementById("StorePictureURL").value;
-	
-	mraid.storePicture(url);
-}
-
-function createCalendarEvent()
-{
-	var calendarObject = {description:"Mayan Apocalypse/End of World", location:"everywhere", start:"2013-12-21T00:00-05:00", end:"2013-12-22T00:00-05:00"};
-
-	logMRAIDMessage("Creating calendar object with params = " + printObject(calendarObject));
-
-	mraid.createCalendarEvent(calendarObject);
 }
 
 function updateUseCustomClose(checked)
