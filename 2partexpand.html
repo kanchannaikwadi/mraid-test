@@ -1,87 +1,10 @@
 <script src="mraid.js"></script>
 
-<style type="text/css">
-body
-{
-	background-color:#ADACAC;
-}
-
-table
-{
-	font-size:6px;
-	width:100%;
-	border:1px solid black;
-}
-
-th
-{
-	border:1px solid black;
-	text-align:center;
-	vertical-align:middle;
-}
-
-td
-{
-	border:1px solid black;
-	text-align:center;
-	vertical-align:middle;
-}
-
-button
-{
-	font-size:6px;
-}
-
-textarea
-{
-	font-size:6px;
-}
-
-input
-{
-	font-size:6px;
-}
-
-select
-{
-	font-size:6px;
-}
-</style>
 
 
+<button onclick="expandTwoPart()">Two Part Expand</button>
+			
 
-<table>
-	<tr>
-		<td>
-			<button onclick="expandTwoPart()">Two Part Expand</button>
-			<input type="checkbox" id="TwoPartExpandUseCustomClose">useCustomClose</input>
-		</td>
-		<td>
-			<textarea id="TwoPartExpandURL" rows="1" cols="50">http://admarvel.s3.amazonaws.com/demo/mraid/MRAID_v2_twopart.html</textarea>
-		</td>
-	</tr>
-</table>
-
-
-<table>
-	<tr>
-		<td>
-			<button onclick="openSite()">Open</button>
-		</td>
-		<td>
-			<textarea id="OpenURL" rows="1" cols="50">http://operamediaworks.com/</textarea>
-		</td>
-	</tr>	
-</table>
-
-<table>
-	<tr>
-		<th>Error</th>
-	</tr>
-	<tr>
-		<td id="Error"></td>
-	</tr>
-</table>
 
 <script language="javascript" type="text/javascript">
 function printObject(o) 
