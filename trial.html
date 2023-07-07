@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>MRAID Two-Part Expand Creative</title>
+    <style>
+        #ad-container {
+            width: 320px;
+            height: 50px;
+            background-color: #ebebeb;
+        }
+        #expand-button {
+            display: block;
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+        }
+        #expanded-ad-container {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #f7f7f7;
+        }
+        #close-button {
+            display: none;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #007bff;
+            color: #fff;
+            padding: 5px;
+            text-align: center;
+            cursor: pointer;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="mraid.js"></script>
+    <script>
+        var isExpanded = false;
+
+        function expandAd() {
+            if (!isExpanded) {
+                isExpanded = true;
+                $('#ad-container').hide();
+                $('#expand-button').hide();
+                $('#expanded-ad-container').show();
+                $('#close-button').show();
+                mraid.setExpandProperties({
+                    width: 320,
+                    height: 480,
+                    useCustomClose: true,
+                });
+                console.log("MRAID: expandTwoPart");
+                mraid.getExpandProperties();
+                mraid.expand("https:\/\/pubmatic.com");
+            }
+        }
+
+        function closeAd() {
+            if (isExpanded) {
+                isExpanded = false;
+                $('#ad-container').show();
+                $('#expand-button').show();
+                $('#expanded-ad-container').hide();
+                $('#close-button').hide();
+                mraid.close();
+            }
+        }
+
+        $(document).ready(function() {
+            $('#expand-button').click(function() {
+                expandAd();
+            });
+
+            $('#close-button').click(function() {
+                closeAd();
+            });
+
+            mraid.addEventListener('ready', function() {
+                mraid.setExpandProperties({
+                    width: 320,
+                    height: 50,
+                    useCustomClose: false
+                });
+                mraid.useCustomClose(false);
+                mraid.setResizeProperties({
+                    width: 320,
+                    height: 50,
+                    offsetX: 0,
+                    offsetY: 0,
+                    allowOffscreen: false
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="ad-container">
+        <div id="expand-button">Click to Expand</div>
+    </div>
+    <div id="expanded-ad-container">
+        
+        <a href="https:\/\/pubmatic.com">Pubmatic</a>
+        <div id="close-button">Close</div>
+    </div>
+</body>
+</html>
