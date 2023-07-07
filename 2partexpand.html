@@ -53,9 +53,10 @@
                 mraid.setExpandProperties({
                     width: 320,
                     height: 480,
-                    useCustomClose: true
+                    useCustomClose: true,
                 });
-                mraid.expand();
+                console.log("MRAID: expandTwoPart");
+                mraid.expand("https:\/\/pubmatic.com");
             }
         }
 
@@ -102,6 +103,7 @@
         <div id="expand-button">Click to Expand</div>
     </div>
     <div id="expanded-ad-container">
+        
         <a href="https:\/\/pubmatic.com">Pubmatic</a>
         <div id="close-button">Close</div>
     </div>
