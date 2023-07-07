@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <title>MRAID Two-Part Expand Creative</title>
@@ -9,6 +10,7 @@
             height: 50px;
             background-color: #ebebeb;
         }
+
         #expand-button {
             display: block;
             background-color: #007bff;
@@ -17,6 +19,7 @@
             text-align: center;
             cursor: pointer;
         }
+
         #expanded-ad-container {
             display: none;
             position: absolute;
@@ -26,6 +29,7 @@
             height: 100%;
             background-color: #f7f7f7;
         }
+
         #close-button {
             display: none;
             position: absolute;
@@ -43,21 +47,47 @@
     <script>
         var isExpanded = false;
 
+        function updateElementInnerHTML(id, newValue) {
+            // logMRAIDMessage("updateElementInnerHTML for id = " + id + ", newValue = " + newValue + ", oldValue = " + document.getElementById(id).innerHTML);
+
+            if (newValue !== document.getElementById(id).innerHTML) {
+                document.getElementById(id).innerHTML = newValue;
+
+                setUpdated(id);
+            }
+        }
+
+        function setUpdated(id) {
+            var element = document.getElementById(id);
+            element.style.backgroundColor = "#008A32";
+
+            setTimeout("clearUpdated('" + id + "')", 1000);
+        }
+
+        function updateExpandPropertiesDiagnostic() {
+            var props = mraid.getExpandProperties();
+            var displayString = printObject(props);
+
+            updateElementInnerHTML("ExpandProperties", displayString);
+        }
+
         function expandAd() {
             if (!isExpanded) {
                 isExpanded = true;
-                $('#ad-container').hide();
-                $('#expand-button').hide();
-                $('#expanded-ad-container').show();
-                $('#close-button').show();
+                // $('#ad-container').hide();
+                // $('#expand-button').hide();
+                // $('#close-button').show();
                 mraid.setExpandProperties({
                     width: 320,
                     height: 480,
                     useCustomClose: true,
                 });
                 console.log("MRAID: expandTwoPart");
-                mraid.getExpandProperties();
-                mraid.expand("https:\/\/pubmatic.com");
+
+                // updateExpandPropertiesDiagnostic()
+                // updateElementInnerHTML("ExpandProperties", displayString);
+
+                mraid.expand("https:\/\/kanchannaikwadi.github.io\/mraid-test\/openFile.html");
             }
         }
 
@@ -66,22 +96,21 @@
                 isExpanded = false;
                 $('#ad-container').show();
                 $('#expand-button').show();
-                $('#expanded-ad-container').hide();
                 $('#close-button').hide();
                 mraid.close();
             }
         }
 
-        $(document).ready(function() {
-            $('#expand-button').click(function() {
+        $(document).ready(function () {
+            $('#expand-button').click(function () {
                 expandAd();
             });
 
-            $('#close-button').click(function() {
+            $('#close-button').click(function () {
                 closeAd();
             });
 
-            mraid.addEventListener('ready', function() {
+            mraid.addEventListener('ready', function () {
                 mraid.setExpandProperties({
                     width: 320,
                     height: 50,
@@ -99,14 +128,11 @@
         });
     </script>
 </head>
+
 <body>
     <div id="ad-container">
         <div id="expand-button">Click to Expand</div>
     </div>
-    <div id="expanded-ad-container">
-        
-        <a href="https:\/\/pubmatic.com">Pubmatic</a>
-        <div id="close-button">Close</div>
-    </div>
 </body>
+
 </html>
